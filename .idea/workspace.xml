@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0efa9a6-d530-45a8-9ac1-380d8d1f2d43" name="默认变更列表" comment="" />
+    <list default="true" id="b0efa9a6-d530-45a8-9ac1-380d8d1f2d43" name="默认变更列表" comment="第一次上传">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorityManage/system/img_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/system/img_list.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorityManage/system/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/system/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorityManage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DjangoRBAC/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoRBAC/settings.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" show_ignored="true">
+    <option name="groupingKeys">
+      <option value="directory" />
+    </option>
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
@@ -23,7 +34,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../wx/wxdesigner_backend" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager">
@@ -61,8 +72,16 @@
       <updated>1635736032289</updated>
       <workItem from="1635736036138" duration="22000" />
       <workItem from="1635736063683" duration="88000" />
-      <workItem from="1635736161333" duration="199000" />
+      <workItem from="1635736161333" duration="8379000" />
     </task>
+    <task id="LOCAL-00001" summary="第一次上传">
+      <created>1635737037503</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1635737037503</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -78,5 +97,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="第一次上传" />
+    <option name="LAST_COMMIT_MESSAGE" value="第一次上传" />
   </component>
 </project>

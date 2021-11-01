@@ -3,6 +3,7 @@ from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
 
 from drf_yasg import openapi
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from rest_framework.response import Response
 from rest_framework import serializers
@@ -34,7 +35,7 @@ class returnUsersModelSerializer(serializers.Serializer):
 
 
 class ProjectUser(APIView):
-    # permission_classes = [CustomPermission]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     @swagger_auto_schema(manual_parameters=[
         openapi.Parameter(
@@ -43,10 +44,17 @@ class ProjectUser(APIView):
             description='电话号码',
             type=openapi.TYPE_INTEGER,
             required=True,
+        ),
+        openapi.Parameter(
+            name='test',
+            in_=openapi.IN_PATH,
+            description='测试字段',
+            type=openapi.TYPE_INTEGER,
+            required=True,
         )
     ],
         responses={'200': returnUsersModelSerializer,
-                  '400': "Bad Request"},
+                   '400': "Bad Request"},
         tags=['测试功能-用户查询']
     )
     def post(self, request, *args, **kwargs):

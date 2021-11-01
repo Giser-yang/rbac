@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 from AuthorityManage.models import Users
 from rest_framework.serializers import ModelSerializer
@@ -24,5 +25,5 @@ class UsersViewSet(ModelViewSet):
     serializer_class = UsersModelSerializer
     filter_backends = (DjangoFilterBackend,)
     filter_fields = ['name', 'username']
-    permission_classes = [CustomPermission]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 

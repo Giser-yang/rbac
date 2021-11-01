@@ -65,9 +65,12 @@ REST_FRAMEWORK = {
             'rest_framework.parsers.MultiPartParser',
             'rest_framework.parsers.JSONParser',
         ],
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #         'rest_framework.permissions.IsAuthenticated', #登录状态下才能访问我们的接口，可以通过退出admin后台之后，你看一下还能不能访问我们正常的接口就看到效果了
-    #     )
+    'DEFAULT_PERMISSION_CLASSES': (
+        # 'rest_framework.permissions.IsAuthenticated',  # IsAuthenticated 仅通过认证的用户
+        # 'rest_framework.permissions.AllowAny',  # AllowAny 允许所有用户
+        # 'rest_framework.permissions.IsAdminUser',  # IsAdminUser 仅管理员用户
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',  # IsAuthenticatedOrReadOnly 认证的用户可以完全操作，否则只能get读取
+        )
 
 }
 

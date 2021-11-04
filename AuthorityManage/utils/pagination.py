@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 from collections import OrderedDict
 
 from django.core import paginator
@@ -15,8 +16,8 @@ class CustomPagination(PageNumberPagination):
     django_paginator_class = DjangoPaginator
 
     def get_paginated_response(self, data):
-        code = 2000
-        msg = 'success'
+        code = 200
+        message = 'success'
         res = {
             "page": int(self.get_page_number(self.request, paginator)) or 1,
             "total": self.page.paginator.count,
@@ -24,13 +25,13 @@ class CustomPagination(PageNumberPagination):
             "data": data
         }
         if not data:
-            code = 2000
-            msg = "暂无数据"
+            code = 200
+            message = "暂无数据"
             res['data'] = []
 
         return Response(OrderedDict([
             ('code', code),
-            ('msg', msg),
+            ('message', message),
             # ('total',self.page.paginator.count),
             ('data', res),
         ]))

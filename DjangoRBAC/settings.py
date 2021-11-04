@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import datetime
 import os
 from pathlib import Path
 
@@ -36,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_swagger',
+    # 'rest_framework.authtoken',
     'drf_yasg',
     'AuthorityManage',
 ]
@@ -45,11 +46,11 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',  # csrf攻击
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'AuthorityManage.utils.middleware.ApiLoggingMiddleware',
+    'AuthorityManage.utils.middleware.ApiLoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoRBAC.urls'
@@ -57,21 +58,46 @@ ROOT_URLCONF = 'DjangoRBAC.urls'
 REST_FRAMEWORK = {
     'DATETIME_FORMAT': "%Y-%m-%d %H:%M:%S",  # 日期时间格式配置
     'DATE_FORMAT': "%Y-%m-%d",
+    'DEFAULT_FILTER_BACKENDS': (
+        # 'django_filters.rest_framework.DjangoFilterBackend',
+        'rest_framework.filters.SearchFilter',
+        'rest_framework.filters.OrderingFilter',
+
+    ),
     'DEFAULT_PAGINATION_CLASS': 'AuthorityManage.utils.pagination.CustomPagination',  # 自定义分页
     # 指定用于支持coreapi的Schema
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_PARSER_CLASSES': [
-            'rest_framework.parsers.FormParser',
-            'rest_framework.parsers.MultiPartParser',
-            'rest_framework.parsers.JSONParser',
-        ],
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.MultiPartParser',
+        'rest_framework.parsers.JSONParser',
+    ],
     'DEFAULT_PERMISSION_CLASSES': (
         # 'rest_framework.permissions.IsAuthenticated',  # IsAuthenticated 仅通过认证的用户
         # 'rest_framework.permissions.AllowAny',  # AllowAny 允许所有用户
         # 'rest_framework.permissions.IsAdminUser',  # IsAdminUser 仅管理员用户
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',  # IsAuthenticatedOrReadOnly 认证的用户可以完全操作，否则只能get读取
-        )
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'EXCEPTION_HANDLER': 'AuthorityManage.utils.exception.CustomExceptionHandler',  # 自定义的异常处理
+}
 
+# ================================================= #
+# ****************** simplejwt配置 ***************** #
+# ================================================= #
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    # token有效时长
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    # token刷新后的有效时间
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    # 设置前缀
+    'AUTH_HEADER_TYPES': ('JWT',),
+    'ROTATE_REFRESH_TOKENS': True
 }
 
 TEMPLATES = [
@@ -153,7 +179,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
-
 MEDIA_ROOT = 'media'  # 项目下的目录
 MEDIA_URL = "/media/"  # 跟STATIC_URL类似，指定用户可以通过这个url找到文件
 
@@ -183,4 +208,100 @@ SWAGGER_SETTINGS = {
     # 方法列表字母排序
     'OPERATIONS_SORTER': 'alpha',
     'VALIDATOR_URL': None,
+    'DEFAULT_AUTO_SCHEMA_CLASS': 'AuthorityManage.utils.swagger.CustomSwaggerAutoSchema',
+}
+
+
+# ================================================= #
+# ********************* 日志配置 ******************* #
+# ================================================= #
+
+# log 配置部分BEGIN #
+SERVER_LOGS_FILE = os.path.join(BASE_DIR, 'logs', 'server.log')
+ERROR_LOGS_FILE = os.path.join(BASE_DIR, 'logs', 'error.log')
+if not os.path.exists(os.path.join(BASE_DIR, 'logs')):
+    os.makedirs(os.path.join(BASE_DIR, 'logs'))
+
+# 格式:[2020-04-22 23:33:01][micoservice.apps.ready():16] [INFO] 这是一条日志:
+# 格式:[日期][模块.函数名称():行号] [级别] 信息
+STANDARD_LOG_FORMAT = '[%(asctime)s][%(name)s.%(funcName)s():%(lineno)d] [%(levelname)s] %(message)s'
+CONSOLE_LOG_FORMAT = '[%(asctime)s][%(name)s.%(funcName)s():%(lineno)d] [%(levelname)s] %(message)s'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': STANDARD_LOG_FORMAT
+        },
+        'console': {
+            'format': CONSOLE_LOG_FORMAT,
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+        'file': {
+            'format': CONSOLE_LOG_FORMAT,
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': SERVER_LOGS_FILE,
+            'maxBytes': 1024 * 1024 * 100,  # 100 MB
+            'backupCount': 5,  # 最多备份5个
+            'formatter': 'standard',
+            'encoding': 'utf-8',
+        },
+        'error': {
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': ERROR_LOGS_FILE,
+            'maxBytes': 1024 * 1024 * 100,  # 100 MB
+            'backupCount': 3,  # 最多备份3个
+            'formatter': 'standard',
+            'encoding': 'utf-8',
+        },
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'console',
+        }
+    },
+    'loggers': {
+        # default日志
+        '': {
+            'handlers': ['console', 'error', 'file'],
+            'level': 'INFO',
+        },
+        'django': {
+            'handlers': ['console', 'error', 'file'],
+            'level': 'INFO',
+        },
+        'scripts': {
+            'handlers': ['console', 'error', 'file'],
+            'level': 'INFO',
+        },
+        # 数据库相关日志
+        'django.db.backends': {
+            'handlers': [],
+            'propagate': True,
+            'level': 'INFO',
+        },
+    }
+}
+
+# ================================================= #
+# *************** 基于计算机内存的缓存配置 ************* #
+# ================================================= #
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',  # 内存缓存引擎
+        'LOCATION': ['127.0.0.1:10000', ],   # 服务器IP地址，端口号，支持多计算机共享内存资源
+        'TIMEOUT': 100,  # 缓存过期时间
+        'OPTIONS': {
+            'MAX_ENTRIES': 10000,    # 最多缓存条目数
+            'CULL_FREQUENCY': 5     # 缓存大道最多条目数后，缓存淘汰条目数的比例（1/CULL_FREQUENCY）
+        }
+    }
 }

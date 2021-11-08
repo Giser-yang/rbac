@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-@author: 猿小天
-@contact: QQ:1638245306
-@Created on: 2021/6/2 002 14:20
-@Remark:登录视图
-"""
 import base64
 import hashlib
 from datetime import datetime, timedelta
@@ -19,7 +13,6 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
-
 from AuthorityManage.models import Users
 from AuthorityManage.utils.json_response import SuccessResponse, ErrorResponse
 

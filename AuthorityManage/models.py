@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission, GroupManager
-from django.utils.translation import gettext_lazy as _
 
+app_name = "AuthorityManage"
 # Create your models here.
 STATUS_CHOICES = (
     (0, "禁用"),
@@ -56,31 +56,6 @@ class APIManage(models.Model):
         ordering = ('-create_datetime',)
 
 
-class Users(AbstractUser):
-    id = models.AutoField(primary_key=True, help_text="Id", verbose_name="Id")
-    username = models.CharField(max_length=150, unique=True, db_index=True, verbose_name='用户账号', help_text="用户账号")
-    email = models.EmailField(max_length=255, verbose_name="邮箱", null=True, blank=True, help_text="邮箱")
-    mobile = models.CharField(max_length=255, verbose_name="电话", null=True, blank=True, help_text="电话")
-    avatar = models.ImageField(upload_to='imgs/%Y%m%d/', verbose_name="头像", null=True, blank=True, help_text="头像")
-    name = models.CharField(max_length=40, verbose_name="姓名", help_text="姓名")
-    GENDER_CHOICES = (
-        (0, "女"),
-        (1, "男"),
-    )
-    gender = models.IntegerField(choices=GENDER_CHOICES, verbose_name="性别", null=True, blank=True, help_text="性别")
-    update_datetime = models.DateTimeField(auto_now=True, null=True, blank=True, help_text="修改时间", verbose_name="修改时间")
-    create_datetime = models.DateTimeField(auto_now_add=True, null=True, blank=True, help_text="创建时间",
-                                           verbose_name="创建时间")
-    APIToUser = models.ManyToManyField(APIManage, blank=True)
-    FileToUser = models.ManyToManyField(FileManage, blank=True)
-
-    class Meta:
-        db_table = "system_users"
-        verbose_name = '用户表'
-        verbose_name_plural = verbose_name
-        ordering = ('create_datetime',)
-
-
 class Groups(Group):
     # name = models.CharField(_('name'), max_length=150, unique=True)
     update_datetime = models.DateTimeField(auto_now=True, null=True, blank=True, help_text="修改时间", verbose_name="修改时间")
@@ -127,3 +102,28 @@ class OperationLog(models.Model):
         verbose_name = '操作日志'
         verbose_name_plural = verbose_name
         ordering = ('-create_datetime',)
+
+
+class Users(AbstractUser):
+    id = models.AutoField(primary_key=True, help_text="Id", verbose_name="Id")
+    username = models.CharField(max_length=150, unique=True, db_index=True, verbose_name='用户账号', help_text="用户账号")
+    email = models.EmailField(max_length=255, verbose_name="邮箱", null=True, blank=True, help_text="邮箱")
+    mobile = models.CharField(max_length=255, verbose_name="电话", null=True, blank=True, help_text="电话")
+    avatar = models.ImageField(upload_to='imgs/%Y%m%d/', verbose_name="头像", null=True, blank=True, help_text="头像")
+    name = models.CharField(max_length=40, verbose_name="姓名", help_text="姓名")
+    GENDER_CHOICES = (
+        (0, "女"),
+        (1, "男"),
+    )
+    gender = models.IntegerField(choices=GENDER_CHOICES, verbose_name="性别", null=True, blank=True, help_text="性别")
+    update_datetime = models.DateTimeField(auto_now=True, null=True, blank=True, help_text="修改时间", verbose_name="修改时间")
+    create_datetime = models.DateTimeField(auto_now_add=True, null=True, blank=True, help_text="创建时间",
+                                           verbose_name="创建时间")
+    APIToUser = models.ManyToManyField(APIManage, blank=True)
+    FileToUser = models.ManyToManyField(FileManage, blank=True)
+
+    class Meta:
+        db_table = "system_users"
+        verbose_name = '用户表'
+        verbose_name_plural = verbose_name
+        ordering = ('create_datetime',)

@@ -1,50 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0efa9a6-d530-45a8-9ac1-380d8d1f2d43" name="默认变更列表" comment="新增API接口文档认证的用户可以完全操作，否则只能get读取">
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/utils/exception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/utils/request_util.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/utils/swagger.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/utils/validator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/imgtest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/login.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/testuser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/token.py" afterDir="false" />
+    <list default="true" id="b0efa9a6-d530-45a8-9ac1-380d8d1f2d43" name="默认变更列表" comment="第二次提交，完善登录部分demo">
+      <change afterPath="$PROJECT_DIR$/AuthorityManage/system/group.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthorityManage/system/logs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/get_permission.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/logout.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/tabledirectory.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/user_group.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AuthorityManage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/system/img_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/system/img_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/system/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/system/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AuthorityManage/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/utils/filters.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/utils/json_response.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/utils/json_response.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/utils/middleware.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/utils/middleware.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/utils/pagination.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/utils/pagination.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/utils/permission.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/utils/serializers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/utils/viewset.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoRBAC/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoRBAC/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DjangoRBAC/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/DjangoRBAC/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/auth/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/auth/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_rest_swagger-2.2.0.dist-info/INSTALLER" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_rest_swagger-2.2.0.dist-info/METADATA" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_rest_swagger-2.2.0.dist-info/RECORD" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_rest_swagger-2.2.0.dist-info/REQUESTED" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_rest_swagger-2.2.0.dist-info/WHEEL" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/django_rest_swagger-2.2.0.dist-info/top_level.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/renderers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/static/rest_framework_swagger/bundles/app.bundle.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/static/rest_framework_swagger/bundles/app.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/static/rest_framework_swagger/bundles/vendors.bundle.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/static/rest_framework_swagger/bundles/vendors.bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/static/rest_framework_swagger/favicon-16x16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/static/rest_framework_swagger/favicon-32x32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/static/rest_framework_swagger/logo_small.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/templates/rest_framework_swagger/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/rest_framework_swagger/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorityManage/views/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/views/login.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +101,9 @@
       <workItem from="1635758231434" duration="4788000" />
       <workItem from="1635817808689" duration="8791000" />
       <workItem from="1635912224411" duration="14741000" />
-      <workItem from="1635990599556" duration="15466000" />
+      <workItem from="1635990599556" duration="23630000" />
+      <workItem from="1636077279170" duration="19227000" />
+      <workItem from="1636336018239" duration="797000" />
     </task>
     <task id="LOCAL-00001" summary="第一次上传">
       <created>1635737037503</created>
@@ -150,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635752279467</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="第二次提交，完善登录部分demo">
+      <created>1636012464191</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1636012464191</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,7 +147,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="第一次上传" />
     <MESSAGE value="新增API接口文档认证的用户可以完全操作，否则只能get读取" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增API接口文档认证的用户可以完全操作，否则只能get读取" />
+    <MESSAGE value="第二次提交，完善登录部分demo" />
+    <option name="LAST_COMMIT_MESSAGE" value="第二次提交，完善登录部分demo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

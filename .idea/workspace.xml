@@ -1,17 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0efa9a6-d530-45a8-9ac1-380d8d1f2d43" name="默认变更列表" comment="第二次提交，完善登录部分demo">
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/system/group.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/system/logs.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/get_permission.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/logout.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/tabledirectory.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AuthorityManage/views/user_group.py" afterDir="false" />
+    <list default="true" id="b0efa9a6-d530-45a8-9ac1-380d8d1f2d43" name="默认变更列表" comment="第三次提交demo">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AuthorityManage/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AuthorityManage/views/login.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/views/login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorityManage/views/get_permission.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/views/get_permission.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorityManage/views/logout.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/views/logout.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AuthorityManage/views/tabledirectory.py" beforeDir="false" afterPath="$PROJECT_DIR$/AuthorityManage/views/tabledirectory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/by.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2-2.9.1.dist-info/INSTALLER" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2-2.9.1.dist-info/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2-2.9.1.dist-info/METADATA" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2-2.9.1.dist-info/RECORD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2-2.9.1.dist-info/REQUESTED" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2-2.9.1.dist-info/WHEEL" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2-2.9.1.dist-info/top_level.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/_ipaddress.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/_json.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/_psycopg.cp38-win_amd64.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/_range.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/errorcodes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/errors.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/extensions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/extras.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/pool.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/sql.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/venv/Lib/site-packages/psycopg2/tz.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +118,9 @@
       <workItem from="1635912224411" duration="14741000" />
       <workItem from="1635990599556" duration="23630000" />
       <workItem from="1636077279170" duration="19227000" />
-      <workItem from="1636336018239" duration="797000" />
+      <workItem from="1636336018239" duration="5786000" />
+      <workItem from="1636422783695" duration="20120000" />
+      <workItem from="1636508917375" duration="1403000" />
     </task>
     <task id="LOCAL-00001" summary="第一次上传">
       <created>1635737037503</created>
@@ -126,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636012464191</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="第三次提交demo">
+      <created>1636336846482</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1636336846482</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,7 +172,8 @@
     <MESSAGE value="第一次上传" />
     <MESSAGE value="新增API接口文档认证的用户可以完全操作，否则只能get读取" />
     <MESSAGE value="第二次提交，完善登录部分demo" />
-    <option name="LAST_COMMIT_MESSAGE" value="第二次提交，完善登录部分demo" />
+    <MESSAGE value="第三次提交demo" />
+    <option name="LAST_COMMIT_MESSAGE" value="第三次提交demo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

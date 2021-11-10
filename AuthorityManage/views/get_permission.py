@@ -25,16 +25,19 @@ class UserPermission(APIView):
         Parameter(name='id', in_=IN_PATH, description='Id', type=openapi.TYPE_STRING,
                   required=True),
     ]
-    @swagger_auto_schema(operation_description="用户权限", manual_parameters=user_view_get_parm, responses=user_view_get_resp, tags=['权限'])
+
+    @swagger_auto_schema(operation_description="用户权限", manual_parameters=user_view_get_parm,
+                         responses=user_view_get_resp, tags=['权限'])
     def get(self, request, *args, **kwargs):
         id = kwargs.get('pk')
         user = Users.objects.get(id=id)
         return_data = {
-            "user_table_permission": user.get_all_permissions(),
+            "user_table_permission": user.get_user_permissions(),
             "user_api_permission": [],
             "user_file_permission": [],
         }
         return SuccessResponse(data=return_data, message="")
+
 
 class GroupPermission(APIView):
     permission_classes = [IsAuthenticated]

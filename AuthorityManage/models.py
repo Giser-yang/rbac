@@ -57,13 +57,11 @@ class APIManage(models.Model):
 
 
 class Groups(Group):
-    # name = models.CharField(max_length=150, unique=True,help_text="组名称")
     update_datetime = models.DateTimeField(auto_now=True, null=True, blank=True, help_text="修改时间", verbose_name="修改时间")
     create_datetime = models.DateTimeField(auto_now_add=True, null=True, blank=True, help_text="创建时间",
                                            verbose_name="创建时间")
-    apitouser= models.ManyToManyField(APIManage, blank=True,related_name='api',verbose_name="api")
-    filetouser = models.ManyToManyField(FileManage, blank=True,related_name='file')
-    authpermissions = models.ManyToManyField(Permission, blank=True,related_name='permissions')
+    APIToGroups= models.ManyToManyField(APIManage, blank=True,related_name='api',verbose_name="api")
+    FileToGroups = models.ManyToManyField(FileManage, blank=True,related_name='file')
 
     objects = GroupManager()
 
@@ -119,9 +117,9 @@ class Users(AbstractUser):
     update_datetime = models.DateTimeField(auto_now=True, null=True, blank=True, help_text="修改时间", verbose_name="修改时间")
     create_datetime = models.DateTimeField(auto_now_add=True, null=True, blank=True, help_text="创建时间",
                                            verbose_name="创建时间")
-    apitouser= models.ManyToManyField(APIManage, blank=True,related_name='apipermissions')
-    filetouser = models.ManyToManyField(FileManage, blank=True,related_name='filepermissions')
-    userpermissions = models.ManyToManyField(Permission, blank=True,related_name='userpermissions')
+    APIToUser = models.ManyToManyField(APIManage, blank=True,related_name='apipermissions')
+    FileToUser  = models.ManyToManyField(FileManage, blank=True,related_name='filepermissions')
+    # users_userpermissions = models.ManyToManyField(Permission, blank=True,related_name='users_userpermissions')
     group = models.ForeignKey(to="Groups", related_name="group",on_delete=models.CASCADE)
     class Meta:
         db_table = "system_users"

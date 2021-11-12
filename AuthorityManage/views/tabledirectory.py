@@ -1,18 +1,11 @@
-import datetime
-
-from django.contrib.auth.models import Permission
-from drf_yasg import openapi
-from drf_yasg.openapi import Parameter, IN_QUERY, TYPE_STRING
 from rest_framework import serializers
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework.decorators import authentication_classes, action
+from rest_framework.decorators import authentication_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from rest_framework.viewsets import ViewSet
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.contenttypes.models import ContentType
-from AuthorityManage.utils.json_response import SuccessResponse, ErrorResponse
+from AuthorityManage.utils.json_response import SuccessResponse
 from django.db.models import Q
 from AuthorityManage.models import Users
 from AuthorityManage.views.grouprelated import APISerializer, FileSerializer,PermissionSerializer
@@ -104,22 +97,22 @@ class TableView(APIView):#根据用户权限获取表单目录,字段名/字段�
         data = TableSerializer(instance=table, many=True).data
         res=[]
         for i in data:
-            temp=[]
+            # temp=[]
             app_label = i['app_label']
             modelname = i ['model']
             model2 = str(ContentType.objects.get(app_label=app_label,model=modelname)).split('|')#模型中文名
-            fields = ContentType.objects.get(app_label=app_label,model=modelname).model_class()._meta.fields#模型字段列表
-            for j in  fields:
-                field={
-                    'fieldname':j.name,#字段名
-                    'verbose_name':j.verbose_name,#字段别名
-                    'type':type(j).__name__#字段类型
-                }
-                temp.append(field)
+            # fields = ContentType.objects.get(app_label=app_label,model=modelname).model_class()._meta.fields#模型字段列表
+            # for j in  fields:
+            #     field={
+            #         'fieldname':j.name,#字段名
+            #         'verbose_name':j.verbose_name,#字段别名
+            #         # 'type':type(j).__name__#字段类型
+            #     }
+            #     temp.append(field)
             res.append({
                 "model_name":modelname,
                 "model_verbose_name": model2[1].replace(' ', ''),#模型别名
-                "fields": temp
+                # "fields": temp
             })
         return SuccessResponse(data=res, message="返回成功")
 

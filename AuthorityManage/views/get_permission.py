@@ -1,5 +1,3 @@
-import datetime
-
 from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from drf_yasg import openapi
@@ -12,8 +10,8 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ViewSet
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from AuthorityManage.models import Users, Groups, APIManage, FileManage
-from django.contrib.auth.models import Group, Permission
+from AuthorityManage.models import Users, Groups
+from django.contrib.auth.models import  Permission
 from AuthorityManage.utils.json_response import SuccessResponse, ErrorResponse
 from AuthorityManage.views.grouprelated import APISerializer, FileSerializer, GroupSerializer, PermissionSerializer
 
@@ -32,26 +30,26 @@ class UserSerializer(serializers.ModelSerializer):  # 用户的序列化器
         read_only_fields = ["id"]
         verbose_name = '用户表'
         verbose_name_plural = verbose_name
-    apitouser = serializers.SerializerMethodField(help_text='api权限列表')
-    filetouser = serializers.SerializerMethodField(help_text='file权限列表')
+    APIToUser = serializers.SerializerMethodField(help_text='api权限列表')
+    FileToUser = serializers.SerializerMethodField(help_text='file权限列表')
     user_table_permission = serializers.SerializerMethodField(help_text='系统权限')
     group_id = serializers.CharField(read_only=True, source="group.id")
     group_name = serializers.CharField(read_only=True, source="group.name")
-
-    def get_apitouser(self, group_obj):
+    #
+    def get_APIToUser(self, group_obj):
         apipermissions_list = list()
-        for apipermission in group_obj.apitouser.all():
+        for apipermission in group_obj.APIToUser.all():
             serializer = APISerializer(apipermission)
             apipermissions_list.append(serializer.data)
         return apipermissions_list
 
-    def get_filetouser(self, group_obj):
+    def get_FileToUser(self, group_obj):
         filepermissions_list = list()
-        for filepermission in group_obj.filetouser.all():
+        for filepermission in group_obj.FileToUser.all():
             serializer = FileSerializer(filepermission)
             filepermissions_list.append(serializer.data)
         return filepermissions_list
-
+    #
     def get_user_table_permission(self, user_obj):#通过中间表获取系统权限
         authpermissions_list = list()
         for apipermission in user_obj.user_permissions.all():
@@ -83,12 +81,13 @@ class UserPermission(APIView):
             return ErrorResponse('该用户不存在！')
         serializer = UserSerializer(user)
         res = serializer.data
+        # authpermissions=''
         authpermissions = user.get_user_permissions()#获取用户的系统权限
         res['user_table_permission'] = authpermissions
         return_data = {
             "user_table_permission": authpermissions,
-            "user_api_permission": res['apitouser'],#api接口
-            "user_file_permission": res['filetouser'],#文件接口
+            "user_api_permission": res['APIToUser'],#api接口
+            "user_file_permission": res['FileToUser'],#文件接口
             "group": {#组
                 'group_id':res["group_id"],
                 'group_name':res['group_name']
@@ -121,13 +120,13 @@ class GroupPermission(ViewSet):
         if group:
             serializer = GroupSerializer(group)
             # 获取系统权限
-            haspermissions = serializer.data['authpermissions']
+            haspermissions = serializer.data['permissions']
             res['group_table_permission'] = haspermissions
             # 获取api权限
-            haspermissions = serializer.data['apitouser']
+            haspermissions = serializer.data['APIToGroups']
             res['group_api_permission'] = haspermissions
             # 获取文件权限
-            haspermissions = serializer.data['filetouser']
+            haspermissions = serializer.data['FileToGroups']
             res['group_file_permission'] = haspermissions
         return SuccessResponse(data=res, message="")
 

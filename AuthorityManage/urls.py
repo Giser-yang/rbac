@@ -19,8 +19,6 @@ system_url.register(r'group', Group1)#组的自定义方法 包含更新权限�
 system_url.register(r'group', GroupViewSet)#组的基本增删改查
 system_url.register(r'', GroupPermission)#查询指定id组的权限
 system_url.register(r'', TablepermissionView)#查询指定id表的权限，登录用户
-# system_url.register(r'', Token)#获取Token相关
-
 
 from AuthorityManage.views.token import TokenObtainPairView, TokenVerifyView, TokenRefreshView
 from AuthorityManage.views.user_group import UserGroup

@@ -1,31 +1,8 @@
-import time
-import base64
-import hmac
-
-from django.contrib.auth.decorators import permission_required
-from django.utils.decorators import method_decorator
-from django.views.decorators.csrf import csrf_exempt
-from drf_yasg.openapi import Parameter, IN_QUERY, TYPE_STRING
-from drf_yasg.utils import swagger_auto_schema
-from rest_framework import serializers
-from rest_framework.views import APIView
-from rest_framework.viewsets import ViewSet, ModelViewSet
-from rest_framework.response import Response
-
-from AuthorityManage.models import Users, Groups
-
-from rest_framework.authentication import BaseAuthentication
-from AuthorityManage import models
-from rest_framework.exceptions import NotAuthenticated
 import json
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login
-from rest_framework.decorators import api_view, authentication_classes, permission_classes, action
-from rest_framework.permissions import IsAuthenticated
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework_jwt.settings import api_settings
 
-from AuthorityManage.utils.json_response import SuccessResponse
 
 def get_token(request):
     #获取用户名、密码

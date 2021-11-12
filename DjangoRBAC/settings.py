@@ -25,10 +25,8 @@ SECRET_KEY = 'django-insecure-w14n(=$l@qw@nsp5y%$&aey@l)44j&0!exq3_5v5q)q(gkr078
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = ['*', '192.168.8.93']
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,20 +35,22 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    # "django.contrib.staticfiles",
     # 'rest_framework.authtoken',
     'drf_yasg',
     'AuthorityManage',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',  # csrf攻击
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'AuthorityManage.utils.middleware.ApiLoggingMiddleware',
+    # 'AuthorityManage.utils.middleware.ApiLoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'DjangoRBAC.urls'
@@ -62,7 +62,6 @@ REST_FRAMEWORK = {
         # 'django_filters.rest_framework.DjangoFilterBackend',
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
-
     ),
     'DEFAULT_PAGINATION_CLASS': 'AuthorityManage.utils.pagination.CustomPagination',  # 自定义分页
     # 指定用于支持coreapi的Schema
@@ -78,26 +77,17 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.IsAdminUser',  # IsAdminUser 仅管理员用户
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',  # IsAuthenticatedOrReadOnly 认证的用户可以完全操作，否则只能get读取
     ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ),
-    'EXCEPTION_HANDLER': 'AuthorityManage.utils.exception.CustomExceptionHandler',  # 自定义的异常处理
+    'DEFAULT_AUTHENTICATION_CLASSES': (#权限的获取方式
+        'rest_framework.authentication.TokenAuthentication',#token
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication'#Session
+
+    )
 }
-
-# ================================================= #
-# ****************** simplejwt配置 ***************** #
-# ================================================= #
-from datetime import timedelta
-
-SIMPLE_JWT = {
-    # token有效时长
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
-    # token刷新后的有效时间
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    # 设置前缀
-    'AUTH_HEADER_TYPES': ('JWT',),
-    'ROTATE_REFRESH_TOKENS': True
+JWT_AUTH = {
+    # 设置token有效时间
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=60 * 60 * 2)  # 2小时
 }
 
 TEMPLATES = [
@@ -130,7 +120,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'AccessControl',
-        'HOST': '127.0.0.1',
+        'HOST': '192.168.8.227',
         'PORT': '5432',
         'USER': 'postgres',
         'PASSWORD': 'jskj@2020'
@@ -210,7 +200,6 @@ SWAGGER_SETTINGS = {
     'VALIDATOR_URL': None,
     'DEFAULT_AUTO_SCHEMA_CLASS': 'AuthorityManage.utils.swagger.CustomSwaggerAutoSchema',
 }
-
 
 # ================================================= #
 # ********************* 日志配置 ******************* #
@@ -297,11 +286,13 @@ LOGGING = {
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',  # 内存缓存引擎
-        'LOCATION': ['127.0.0.1:10000', ],   # 服务器IP地址，端口号，支持多计算机共享内存资源
-        'TIMEOUT': 100,  # 缓存过期时间
+        'LOCATION': ['127.0.0.1:10000', ],  # 服务器IP地址，端口号，支持多计算机共享内存资源
+        'TIMEOUT': 300,  # 缓存过期时间
         'OPTIONS': {
-            'MAX_ENTRIES': 10000,    # 最多缓存条目数
-            'CULL_FREQUENCY': 5     # 缓存大道最多条目数后，缓存淘汰条目数的比例（1/CULL_FREQUENCY）
+            'MAX_ENTRIES': 10000,  # 最多缓存条目数
+            'CULL_FREQUENCY': 5  # 缓存大道最多条目数后，缓存淘汰条目数的比例（1/CULL_FREQUENCY）
         }
     }
 }
+
+MIDDLEWARE_CLASSES = ('AuthorityManage.tests.DisableCSRF',)

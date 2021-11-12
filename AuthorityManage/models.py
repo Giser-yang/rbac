@@ -57,12 +57,13 @@ class APIManage(models.Model):
 
 
 class Groups(Group):
-    # name = models.CharField(_('name'), max_length=150, unique=True)
+    # name = models.CharField(max_length=150, unique=True,help_text="组名称")
     update_datetime = models.DateTimeField(auto_now=True, null=True, blank=True, help_text="修改时间", verbose_name="修改时间")
     create_datetime = models.DateTimeField(auto_now_add=True, null=True, blank=True, help_text="创建时间",
                                            verbose_name="创建时间")
-    APIToGroups = models.ManyToManyField(APIManage, blank=True)
-    FileToGroups = models.ManyToManyField(FileManage, blank=True)
+    apitouser= models.ManyToManyField(APIManage, blank=True,related_name='api',verbose_name="api")
+    filetouser = models.ManyToManyField(FileManage, blank=True,related_name='file')
+    authpermissions = models.ManyToManyField(Permission, blank=True,related_name='permissions')
 
     objects = GroupManager()
 
@@ -77,7 +78,6 @@ class Groups(Group):
 
     def natural_key(self):
         return (self.name,)
-
 
 class OperationLog(models.Model):
     id = models.AutoField(primary_key=True, help_text="Id", verbose_name="Id")
@@ -119,11 +119,13 @@ class Users(AbstractUser):
     update_datetime = models.DateTimeField(auto_now=True, null=True, blank=True, help_text="修改时间", verbose_name="修改时间")
     create_datetime = models.DateTimeField(auto_now_add=True, null=True, blank=True, help_text="创建时间",
                                            verbose_name="创建时间")
-    APIToUser = models.ManyToManyField(APIManage, blank=True)
-    FileToUser = models.ManyToManyField(FileManage, blank=True)
-
+    apitouser= models.ManyToManyField(APIManage, blank=True,related_name='apipermissions')
+    filetouser = models.ManyToManyField(FileManage, blank=True,related_name='filepermissions')
+    userpermissions = models.ManyToManyField(Permission, blank=True,related_name='userpermissions')
+    group = models.ForeignKey(to="Groups", related_name="group",on_delete=models.CASCADE)
     class Meta:
         db_table = "system_users"
         verbose_name = '用户表'
         verbose_name_plural = verbose_name
         ordering = ('create_datetime',)
+

@@ -22,7 +22,6 @@ class LoginSerializer(TokenObtainPairSerializer):
     登录的序列化器:
     重写djangorestframework-simplejwt的序列化器
     """
-
     class Meta:
         model = Users
         fields = "__all__"
@@ -73,16 +72,3 @@ class ApiLoginSerializer(serializers.Serializer):
         model = Users
         fields = ['username', 'password']
 
-
-# class ApiLogin(APIView):
-#     """接口文档的登录接口"""
-#     serializer_class = ApiLoginSerializer
-#
-#     def post(self, request):
-#         username = request.data.get('username')
-#         password = request.data.get('password')
-#         user_obj = auth.authenticate(request, username=username, password=password)
-#         if user_obj:
-#             return redirect('/')
-#         else:
-#             return ErrorResponse(msg="账号/密码错误")
